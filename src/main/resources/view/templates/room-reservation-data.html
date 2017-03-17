@@ -1,0 +1,100 @@
+<form  name="reservationRoomManagement" ng-show="showData== 0" ng-submit="reservationRoomManagement.$valid && submitForm()">
+	<div class="well">
+		<div class="form-horizontal" >
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>Choose the room to live an incredible experience!</h2>
+				</div>
+			</div>
+			<br/>
+
+				<div class="row">
+					<div class="col-xs-12" align="center"><h3>Reservation Details</h3></div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-4">
+
+						<div class=" form-group">
+							<label class="control-label" for="formGroup">Check in Date *</label>
+
+								<p class="input-group">
+									<input type="text"
+									class="form-control"
+									id="checkInDate"
+									ng-model="reservation.checkInDate"
+									ng-change="validateDates()"
+									uib-datepicker-popup="{{format}}"
+									is-open="checkInDate.opened"
+									datepicker-options="dateOptions"
+									close-text="Close"
+									alt-input-formats="altInputFormats"
+									readonly/>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default" ng-click="openCheckInDate()"><i class="glyphicon glyphicon-calendar"></i></button>
+									</span>
+								</p>
+
+						</div>
+
+
+						<div class="form-group">
+							<label class="control-label" for="formGroup">Check in Time *</label>
+							<select class="form-control" ng-model="reservation.checkInTime" name="checkInTime"
+							ng-options="items for items in checkInTime"
+							required>
+							</select>
+							<span class="has-error">All games last an hour</span>
+						</div>
+
+						<div class="form-group">
+							<label class="label label-success">Total Price</label>
+							<input type="text" class="form-control" ng-model="reservation.totalPrice" ng-currency readonly>
+						</div>
+					</div>
+					<!-- Second column -->
+					<!-- Game data -->
+					<div class="col-md-offset-1 col-md-4">
+						<div class="form-group">
+							<label class="control-label" for="formGroup">Number of Players *</label>
+							<select ng-change="calculatePrice()" class="form-control" ng-model="reservation.numOfPlayers" name="numOfPlayers"
+							ng-options="nums for nums in numberOfPlayers"
+							 required>
+							</select>
+
+						</div>
+
+						<div class="form-group">
+							<label class="control-label" for="formGroup">Select Game Room *:</label>
+							<div ng-repeat="game in games">
+								<input type="radio" name="gameRoom" ng-model="reservation.roomPreference" ng-value="game" />{{game}}
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<div class="row">
+				<div class="pull-left col-sm-4">
+					<button type="submit" class="btn btn-success" ng-disabled="reservationRoomManagement.$invalid || !allValidFields()">
+						Reserve
+					</button>
+				</div>
+				<div class="pull-right col-sm-1">
+					<button class="btn btn-danger" ng-click="goToHome()">
+						Back
+					</button>
+				</div>
+			</div>
+			</div>
+		</div>
+</form>
+
+<div ng-if="showData == 1">
+	<h2>Reservation's Data</h2>
+	<p>Registry id: {{reservation.getId()}}</p>
+	<p>Number of Players: {{reservation.getNumOfPlayers()}}</p>
+	<p>Game Room:{{reservation.getRoomPreference()}}</p>
+	<p>Check In Date: {{reservation.getCheckInDate() | date :  "dd.MM.y"}}</p>
+	<p>Check In Time: {{reservation.getCheckInTime()}}</p>
+	<p>Total Price: {{reservation.getTotalPrice()}}</p>
+	<button type="button" class="btn btn-danger" ng-click="goBack()" name="button">Back</button>
+</div>

@@ -1,0 +1,62 @@
+<div class="container well col-xs-8" >
+<form name="addGameForm" ng-show="!allValid" ng-submit="addGameForm.$valid && addCtrl.submit()"  novalidate>
+			<div class="row">
+				<div class="col-xs-12"><h2>Add new Game</h2></div>
+			</div>
+			<br/>
+			<div class="form-group">
+						<label for="min-players">Game Id</label>
+						<input type="number" ng-model="game.id" ng-pattern="/^[0-9]{1,}$/" class="form-control" min="0" step="1" placeholder="1" required>
+			</div>
+
+			<div class="form-group" >
+            <label  for="name">Name</label>
+            <input type="text" class="form-control" ng-model="game.name" ng-pattern="/^[A-Z][a-zA-Z0-9]{6,}$/" name="title" placeholder="Labyrinth"required>
+      </div>
+			<div class="form-group">
+			<label class="control-label" for="description">Description</label>
+				<textarea class="form-control" rows="6" cols="20" ng-pattern="/^[A-Z]\w{50,150}$/"  type="text"  ng-model="game.description" placeholder="description" required></textarea>
+			</div>
+			<div class="form-group" >
+						<label  for="price">Price </label>
+						<input type="number" class="form-control" min="5" step="1" ng-model="game.price" ng-pattern="/^[1-9]+(\.[0-9]{1,2})?$/" name="price" placeholder="10" required>
+			</div>
+			<span class="alert-info">Select the min and max players of the game</span>
+			<div class="form-group">
+						<label for="min-players">Min Players</label>
+						<input type="number" ng-model="game.minPlayers" class="form-control" ng-pattern="/^[2-9]$/" min="2" step="1" placeholder="2" required>
+			</div>
+			<div class="form-group">
+						<label for="max-players">Max Players</label>
+						<input type="number" ng-model="game.maxPlayers" class="form-control" ng-pattern="/^[2-9]$/" min={{game.minPlayers}} step="1" max="8" placeholder={{game.minPlayers}} required>
+			</div>
+			<!--Buttons-->
+			<div class="form-group">
+				<label class="control-label"></label>
+				<div class="col-sm-4">
+					<button class="btn btn-success" ng-click="allValid=true"   ng-disabled="addGameForm.$invalid">
+						Submit
+					</button>
+				</div>
+				<div class="form-group pull-right">
+					<label>
+						<input class="btn btn-default btn-primary btn-block" ng-click="$parent.action=0" type="button" value="Back" >
+					</label>
+				</div>
+			</div>
+			<!--Form's end-->
+
+		</form>
+		<!--Once we finish the form and the values are introduced correctly-->
+		<div ng-if="allValid">
+			<h2>Game created correctly!</h2>
+			<p>Game id: {{game.id}}</p>
+			<p>Game name: {{game.name}}</p>
+			<p>Game description:{{game.description}}</p>
+			<p>Min Players: {{game.minPlayers}}</p>
+			<p>Max Players: {{game.maxPlayers}}</p>
+			<p>Upload Date: {{game.uploadDate}}</p>
+			<input class="btn btn-success pull-right" ng-click="addCtrl.init() " type="button" value="Save changes">
+			<input class="btn btn-danger pull-left" ng-click="addCtrl.backForm()" type="button" value="Back">
+		</div>
+</div>

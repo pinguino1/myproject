@@ -1,0 +1,44 @@
+input.ng-invalid.ng-dirty, textarea.ng-invalid.ng-dirty
+{
+    border-left:5px solid red;
+}
+
+input.ng-valid.ng-dirty, textarea.ng-valid.ng-dirty
+{
+
+  border-left:5px solid green;
+}
+
+img{
+  width: 100%;
+}
+span{
+  color: red;
+}
+.navbar-inverse .navbar-nav li.nav-button a{
+  display: block;
+  border-radius: 5px;
+  background-color: #46c892;
+  margin-left:600px;
+  color: #fff;
+}
+.navbar-inverse .navbar-nav li.nav-button:hover a{
+  display: block;
+  border-radius: 5px;
+  background-color: #96c892;
+  margin-left:600px;
+  color: #fff;
+}
+header{
+  height: auto;
+  margin-bottom: 10px;
+}
+input[type=radio]{
+  margin:15px;
+}
+input[type="text"].myFocus {
+            background-color: lightblue;
+        }
+input[type="text"].myBlur {
+            background-color: pink;
+}

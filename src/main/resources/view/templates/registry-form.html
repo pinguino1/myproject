@@ -1,0 +1,104 @@
+<div class="container well">
+		<form class="login2" ng-show="!allValid" name="registryManagement" ng-submit="registryManagement.$valid && registryCtrl.submit()" novalidate>
+		<div class="form-horizontal" >
+			<div class="row">
+				<div class="col-xs-12"><h2>Registry form</h2></div>
+			</div>
+			<br/>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-12" align="center"><h3>Personal data</h3></div>
+				</div>
+
+				<label class="col-sm-2 control-label" for="formGroup">Name *</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" placeholder="Name" ng-model="user.name" ng-pattern="/^[A-Z][a-zA-Z]{2,}$/" type="text" required />
+				</div>
+
+				<label class="col-sm-2 control-label" for="formGroup">Surname*</label>
+				<div class="col-sm-4">
+					<input class="form-control" ng-pattern="/^[A-Z][a-zA-Z]{3,}$/" ng-model="user.surname" type="text"  ng-model="user.surname" placeholder="Surname" required />
+				</div>
+
+				<label class="col-sm-2 control-label" for="formGroup">Address*</label>
+				<div class="col-sm-4">
+					<input class="form-control" ng-pattern="/^\w{5,}$/" ng-model="user.address" type="text" placeholder="Address" required />
+				</div>
+
+				<label class="col-sm-2 control-label" for="formGroup">City *</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" ng-pattern="/^[A-Z][a-z]{3,}$/" ng-model="user.city" placeholder="City" required />
+				</div>
+
+			<label class="col-sm-2 control-label">Gender:</label>
+				<div class="col-sm-4">
+					<label class="checkbox-inline"><input type="radio" name="gender" ng-model="user.gender" value="male">Male</label>
+					<label class="checkbox-inline"><input type="radio" name="gender" ng-model="user.gender" value="female">Female</label>
+				</div>
+
+				<label class="col-sm-2 control-label" for="formGroup">Phone *:</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"  ng-pattern="/^[6][0-9]{8}$/" ng-model="user.phone" placeholder="658654982" required/>
+				</div>
+
+				<label class="col-sm-2 control-label" for="formGroup">Email Adress *:</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="email" ng-model="user.email" placeholder="example@gmail.com" required />
+				</div>
+
+			</div>
+			<!--Birth date-->
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="formGroup">Birth date*:</label>
+				<div class="col-sm-6">
+					<p class="input-group">
+						<input type="text"
+						class="form-control"
+						id="checkInDate"
+						ng-model="user.birthDate"
+						uib-datepicker-popup="{{format}}"
+						is-open="checkInDate.opened"
+						datepicker-options="dateOptions"
+						close-text="Close"
+						alt-input-formats="altInputFormats"
+						readonly/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="openCheckInDate()"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+					</p>
+				</div>
+			</div>
+			<br />
+			<br />
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="formGroup"></label>
+				<div class="col-sm-4">
+					<button class="btn btn-success" ng-click="allValid=true" ng-disabled="registryManagement.$invalid">
+						Submit
+					</button>
+				</div>
+				<div class="form-group col-sm-6">
+					<label>
+						<input class="btn btn-default btn-primary btn-block"  ng-click="$parent.action=0" type="button" value="Back" >
+					</label>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!--End of the form-->
+	<!--Once we finish the form and the values are introduced correctly-->
+	<div ng-if="allValid">
+		<h2>Registry's Data</h2>
+		<p>User's id: {{user.id}}</p>
+		<p>Name: {{user.name}}</p>
+		<p>Surname:{{user.surname}}</p>
+		<p>Address: {{user.address}}</p>
+		<p>City: {{user.city}}</p>
+		<p>Gender: {{user.gender}}</p>
+		<p>Phone: {{user.phone}}</p>
+		<p>Email: {{user.email}}</p>
+		<p>Birthdate: {{user.birthDate}}</p>
+		<input class="btn btn-danger pull-left" ng-click="registryCtrl.backForm()" type="button" value="Back">
+		<input class="btn btn-success pull-right" ng-click="registryCtrl.init()" type="button" value="Save changes and exit">
+	</div>
+</div>
